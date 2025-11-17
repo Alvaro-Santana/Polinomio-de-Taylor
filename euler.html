@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="views/seno.css">
+    <title>Constante de Euler</title>
+</head>
+<body>
+    <div id="body-fake">
+        <img src="views/assets/images/background.jpg" class="background-img">
+
+        <header>
+            <a href="index.html"><img src="views/assets/images/Tipografia.png" alt=""></a>
+        </header>
+
+        <div class="Principal">
+
+            <div class="calc-box">
+                <h1>Cálculo de e<sup>x</sup></h1>
+
+                <label for="valorX">Digite o valor de x:</label>
+                <input type="number" id="valorX" placeholder="Ex: 2.5">
+
+                <button onclick="calcularEuler()">Calcular</button>
+
+                <p id="resultado"></p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+<script src="public/euler.js"></script>

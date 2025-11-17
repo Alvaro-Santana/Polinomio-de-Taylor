@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#body-fake {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 0;
+    pointer-events: none;
+    filter: brightness(0.5) saturate(0);
+
+}
+
+header {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: start;
+    position: relative;
+    z-index: 1;
+}
+
+header img {
+    scale: 0.7;
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 12%;
+    cursor: pointer;
+}
+
+.Principal {
+    width: 100%;
+    display: flex;
+    position: relative;
+    height: 100%;
+    z-index: 1;
+}
+.pri-1 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pri-2 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    transform: translate( 0%, -50%);
+    display: flex;
+    justify-content: center;
+}
+
+.center {
+    width: 180px;
+    height: 60px;
+}
+
+.btn {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #91C9FF;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+svg {
+
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+}
+
+.btn:hover {
+    transition: 1s ease-in-out;
+    background: #4F95DA;
+}
+
+.btn:hover svg {
+    stroke-dashoffset: -480;
+}
+
+.btn span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+    position: relative;
+    top: -75%;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="views/seno.css">
+    <title>Raiz</title>
+</head>
+<body>
+    <div id="body-fake">
+        <img src="views/assets/images/background.jpg" class="background-img">
+
+        <header>
+            <a href="index.html"><img src="views/assets/images/Tipografia.png" alt=""></a>
+        </header>
+
+        <div class="Principal">
+
+            <div class="calc-box">
+                <h1>Índice √ Valor</h1>
+
+                <label>Índice (2 = quadrada, 3 = cúbica...):</label>
+                <input type="number" id="indice">
+
+                <label>Valor:</label>
+                <input type="number" id="valor">
+
+                <button onclick="calcularRaiz()">Calcular</button>
+
+                <p id="resultado"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="public/rad.js"></script>
+</body>
+</html>
