@@ -2,19 +2,23 @@ function perguntarUnidade() {
     const ang = document.getElementById("angulo").value;
 
     if (ang === "") {
-        alert("Digite um valor primeiro!");
+        alert("Digite um valor!");
         return;
     }
 
-    const tipo = confirm("O valor está em GRAUS? (OK = graus, Cancelar = radianos)");
+    const isGrau = confirm("O valor está em GRAUS? (OK = graus, Cancelar = radianos)");
 
     let x = parseFloat(ang);
+    let xRad = 0;
 
-    if (tipo) {
-        x = x * (Math.PI / 180); // converte para rad
+    if (isGrau) {
+        xRad = x * (Math.PI / 180);
+    } else {
+        const grauReducao = ((x * 100) % (2 * Math.PI * 100)) / 100;
+        xRad = grauReducao * (Math.PI / 180);
     }
 
-    calcularTaylorSeno(x);
+    calcularTaylorSeno(xRad);
 }
 
 function calcularTaylorSeno(x) {
@@ -23,8 +27,8 @@ function calcularTaylorSeno(x) {
     const termo3 = (Math.pow(x, 5) / 120);
     const termo4 = -(Math.pow(x, 7) / 5040);
 
-    const taylor = termo1 + termo2 + termo3 + termo4;
+    const resultado = termo1 + termo2 + termo3 + termo4;
 
     document.getElementById("resultado").innerHTML =
-        "Resultado (Taylor ordem 7): <br><strong>" + taylor + "</strong>";
+        "Resultado (Taylor ordem 7):<br><strong>" + resultado + "</strong>";
 }
