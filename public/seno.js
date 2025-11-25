@@ -19,12 +19,18 @@ function senoNormal(g) {
 }
 
 function calcularSeno() {
-    let val = parseFloat(document.getElementById("valor").value);
+    let entrada = document.getElementById("valor").value;
+    entrada = entrada.replace(",", ".");
+    let val = parseFloat(entrada);
+
     if (isNaN(val)) { alert("Valor inválido"); return; }
+
     let rad = confirm("O valor está em RADIANOS? OK=Sim / Cancelar=Não");
     if (rad) val = radianoParaGrau(val);
+
     let t = senoTaylor7(val);
     let n = senoNormal(val);
+
     document.getElementById("resultado").innerHTML =
         `<p>Seno Taylor(7): ${t}</p><p>Seno Math.sin: ${n}</p>`;
 }
