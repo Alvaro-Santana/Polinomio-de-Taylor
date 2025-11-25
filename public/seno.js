@@ -1,26 +1,35 @@
 function perguntarUnidade() {
-    let v = document.getElementById("angulo").value.replace(",", ".");
-    let num = parseFloat(v);
+    const ang = document.getElementById("angulo").value;
 
-    if (isNaN(num)) {
-        document.getElementById("resultado").innerText = "Valor inválido";
+    if (ang === "") {
+        alert("Digite um valor!");
         return;
     }
 
-    let tipo = confirm("OK = radiano | CANCELAR = grau");
-    let angulo;
+    const isGrau = confirm("O valor está em GRAUS? (OK = graus, Cancelar = radianos)");
+    let x = parseFloat(ang);
+    let xRad = 0;
 
-    if (tipo) {
-        let rad = num;
-        if (Math.abs(rad) > 6.28) rad = (rad % (2 * Math.PI * 100)) / 100;
-        angulo = rad * (180 / Math.PI);
+    if (isGrau) {
+        // GRAUS → RADIANOS
+        xRad = x * (Math.PI / 180);
     } else {
-        angulo = num;
+        // RADIANOS → REDUÇÃO CORRETA
+        const doisPi = 2 * Math.PI;
+        xRad = x % doisPi;  // reduzir primeiro
     }
 
-    let x = angulo * (Math.PI / 180);
+    calcularTaylorSeno(xRad);
+}
 
-    let s = x - x**3/6 + x**5/120 - x**7/5040;
+function calcularTaylorSeno(x) {
+    const termo1 = x;
+    const termo2 = -(Math.pow(x, 3) / 6);
+    const termo3 = (Math.pow(x, 5) / 120);
+    const termo4 = -(Math.pow(x, 7) / 5040);
 
-    document.getElementById("resultado").innerText = s;
+    const resultado = termo1 + termo2 + termo3 + termo4;
+
+    document.getElementById("resultado").innerHTML =
+        "Resultado (Taylor ordem 7):<br><strong>" + resultado + "</strong>";
 }
