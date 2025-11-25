@@ -11,25 +11,20 @@ function perguntarUnidade() {
     let xRad = 0;
 
     if (isGrau) {
-        // GRAUS → RADIANOS
+        // GRAUS → RAD
         xRad = x * (Math.PI / 180);
     } else {
-        // RADIANOS → REDUÇÃO CORRETA
+        // RADIANOS
         const doisPi = 2 * Math.PI;
-        xRad = x % doisPi;  // reduzir primeiro
+
+        if (Math.abs(x) <= doisPi) {
+            // Pequeno → NÃO REDUZ
+            xRad = x;
+        } else {
+            // Grande → REDUZ
+            xRad = x % doisPi;
+        }
     }
 
     calcularTaylorSeno(xRad);
-}
-
-function calcularTaylorSeno(x) {
-    const termo1 = x;
-    const termo2 = -(Math.pow(x, 3) / 6);
-    const termo3 = (Math.pow(x, 5) / 120);
-    const termo4 = -(Math.pow(x, 7) / 5040);
-
-    const resultado = termo1 + termo2 + termo3 + termo4;
-
-    document.getElementById("resultado").innerHTML =
-        "Resultado (Taylor ordem 7):<br><strong>" + resultado + "</strong>";
 }
