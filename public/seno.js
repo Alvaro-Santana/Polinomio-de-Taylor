@@ -1,31 +1,30 @@
-function taylorSin(x) {
-    // 1) Redução de ângulo (mantém precisão)
-    x = x % (2 * Math.PI);
-
-    // 2) Melhor redução: deixa o ângulo dentro de -PI/2 a PI/2
-    if (x > Math.PI / 2) {
-        x = Math.PI - x;
-    } else if (x < -Math.PI / 2) {
-        x = -Math.PI - x;
-    }
-
-    // 3) Polinômio de Taylor de ordem 7 para seno
-    const x2 = x * x;
-    return x
-        - (x * x2) / 6
-        + (x * x2 * x2) / 120
-        - (x * x2 * x2 * x2) / 5040;
+function reduzir(g) {
+    if (Math.abs(g) > 360) return g % 360;
+    return g;
 }
 
-function senoEntrada(valor) {
-    let rad;
-
-    if (valor > 2 * Math.PI) {
-        rad = valor * (Math.PI / 180); // graus → radianos
-    } else {
-        rad = valor; // radianos direto
-    }
-
-    return taylorSin(rad);
+function radianoParaGrau(r) {
+    return r * (180 / Math.PI);
 }
 
+function senoTaylor7(g) {
+    g = reduzir(g);
+    const x = g * (Math.PI / 180);
+    return x - x**3/6 + x**5/120 - x**7/5040;
+}
+
+function senoNormal(g) {
+    g = reduzir(g);
+    return Math.sin(g * Math.PI / 180);
+}
+
+function calcularSeno() {
+    let val = parseFloat(document.getElementById("valor").value);
+    if (isNaN(val)) { alert("Valor inválido"); return; }
+    let rad = confirm("O valor está em RADIANOS? OK=Sim / Cancelar=Não");
+    if (rad) val = radianoParaGrau(val);
+    let t = senoTaylor7(val);
+    let n = senoNormal(val);
+    document.getElementById("resultado").innerHTML =
+        `<p>Seno Taylor(7): ${t}</p><p>Seno Math.sin: ${n}</p>`;
+}
