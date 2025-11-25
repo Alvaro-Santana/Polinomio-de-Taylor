@@ -21,18 +21,27 @@ function perguntarUnidade() {
         // Caso 1: Valor pequeno → usar direto
         if (Math.abs(x) <= doisPi) {
             xRad = x;
+
+            // Converter grau pela fórmula padrao que você aprovou
+            xGraus = xRad * (180 / Math.PI);
+
+            // Voltar para radiano
+            xRad = xGraus * (Math.PI / 180);
         } 
         
-        // Caso 2: Valor grande → reduzir
+        // Caso 2: Valor grande → usar sua fórmula especial
         else {
-            xRad = x % doisPi;
+
+            // SUA fórmula:
+            // (x * 100) % (2π * 100) / 100
+            let reduzido = ((x * 100) % (2 * Math.PI * 100)) / 100;
+
+            // reduzido já é o valor que vira GRAUS
+            xGraus = reduzido;
+
+            // Converter para radiano para o polinômio
+            xRad = xGraus * (Math.PI / 180);
         }
-
-        // Agora CONVERTER SEMPRE PARA GRAUS
-        xGraus = xRad * (180 / Math.PI);
-
-        // E CONVERTER DE VOLTA PARA RAD
-        xRad = xGraus * (Math.PI / 180);
     }
 
     calcularTaylorSeno(xRad);
