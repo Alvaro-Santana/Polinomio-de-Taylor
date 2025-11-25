@@ -1,5 +1,5 @@
 function perguntarUnidade() {
-    let v = document.getElementById("valor").value.replace(",", ".");
+    let v = document.getElementById("angulo").value.replace(",", ".");
     let num = parseFloat(v);
 
     if (isNaN(num)) {
