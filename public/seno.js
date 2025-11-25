@@ -1,34 +1,33 @@
-function perguntarUnidade() {
-    const ang = document.getElementById("angulo").value;
+function taylorSin(x) {
+    // 1) Redução de ângulo (mantém precisão)
+    x = x % (2 * Math.PI);
 
-    if (ang === "") {
-        alert("Digite um valor!");
-        return;
+    // 2) Melhor redução: deixa o ângulo dentro de -PI/2 a PI/2
+    if (x > Math.PI / 2) {
+        x = Math.PI - x;
+    } else if (x < -Math.PI / 2) {
+        x = -Math.PI - x;
     }
 
-    const isGrau = confirm("O valor está em GRAUS? (OK = graus, Cancelar = radianos)");
-
-    let x = parseFloat(ang);
-    let xRad = 0;
-
-    if (isGrau) {
-        xRad = x * (Math.PI / 180);
-    } else {
-        const grauReducao = ((x * 100) % (2 * Math.PI * 100)) / 100;
-        xRad = grauReducao * (Math.PI / 180);
-    }
-
-    calcularTaylorSeno(xRad);
+    // 3) Polinômio de Taylor de ordem 7 para seno
+    const x2 = x * x;
+    return x
+        - (x * x2) / 6
+        + (x * x2 * x2) / 120
+        - (x * x2 * x2 * x2) / 5040;
 }
 
-function calcularTaylorSeno(x) {
-    const termo1 = x;
-    const termo2 = -(Math.pow(x, 3) / 6);
-    const termo3 = (Math.pow(x, 5) / 120);
-    const termo4 = -(Math.pow(x, 7) / 5040);
+// --- Função completa: detecta graus ou radianos ---
+function senoEntrada(valor) {
+    let rad;
 
-    const resultado = termo1 + termo2 + termo3 + termo4;
+    // Se o valor for maior que 2π, assumimos que é em graus
+    if (valor > 2 * Math.PI) {
+        rad = valor * (Math.PI / 180); // graus → radianos
+    } else {
+        rad = valor; // radianos direto
+    }
 
-    document.getElementById("resultado").innerHTML =
-        "Resultado (Taylor ordem 7):<br><strong>" + resultado + "</strong>";
+    // Calcula seno com Taylor
+    return taylorSin(rad);
 }
