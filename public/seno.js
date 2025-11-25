@@ -17,17 +17,15 @@ function taylorSin(x) {
         - (x * x2 * x2 * x2) / 5040;
 }
 
-// --- Função completa: detecta graus ou radianos ---
 function senoEntrada(valor) {
     let rad;
 
-    // Se o valor for maior que 2π, assumimos que é em graus
     if (valor > 2 * Math.PI) {
         rad = valor * (Math.PI / 180); // graus → radianos
     } else {
         rad = valor; // radianos direto
     }
 
-    // Calcula seno com Taylor
     return taylorSin(rad);
 }
+
